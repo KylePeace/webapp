@@ -22,7 +22,8 @@ news = soup.select(".nba-news-list")
 # print(news[0].text)
 # print(news[0].href)
 # print(len(news[0]))
-for item in news[0]:
-    print(item)
-    print(item.next)
+for item in news[0].select("a"):
+    #print(item)
+    print(item.text)
+    print(item["href"])
     
