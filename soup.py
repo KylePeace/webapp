@@ -7,6 +7,8 @@ import requests
 from bs4 import BeautifulSoup
 
 
+data = []
+
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3)\
     AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
 
@@ -47,8 +49,23 @@ for item in news[0].select("a"): #选择a标签
     #print("评论数："+soup2.select(".bbs-hd-h1")[0])
     print("评论数："+soup2.select(".bbs-hd-h1")[0].select("span")[1].text.strip("回复"))
 
-    print(soup2.select(".case")[0])
+    #print(soup2.select(".case")[0])
+    print("正文：")
+    
+    #print(soup2.select(".quote-content")[0].select("p")[0].text,end = '')
+    if len(soup2.select(".quote-content"))<=0 or  len(soup2.select(".quote-content")[0].select("p"))<=0:
+        continue
+
+    for content in soup2.select(".quote-content")[0].select("p")[0].text:
+        if content == "，":
+            print("\n")
+        else:
+            print(content,end='')
 
     print("\n"*2)
- 
- 
+
+    itemData=[item.text,item["href"],name,soup2.select(".bbs-hd-h1")[0].select("span")[1].text.strip("回复"),soup2.select(".quote-content")[0].select("p")[0].text]
+    #print(itemData)
+    data.append(itemData)
+
+print(data)
