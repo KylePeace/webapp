@@ -61,6 +61,7 @@ class CreateExcelData(object):
 
     def save_excel(self):
         self.excel.save(self.path)
+        print("创建excel表成功")
 
 
 if __name__ == '__main__':
