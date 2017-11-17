@@ -5,7 +5,7 @@
 
 import requests
 from bs4 import BeautifulSoup
-
+from CreateExcelData import *
 
 data = []
 
@@ -69,3 +69,19 @@ for item in news[0].select("a"): #选择a标签
     data.append(itemData)
 
 print(data)
+excel = CreateExcelData("news", "excel/news.xls")
+title = ["标题","链接","楼主","评论数","正文"]
+
+cur_row = 0
+for item in title: #表头
+    excel.write_to_excel(0,k,item)
+    key +=1
+
+cur_row = 0
+cur_col = 3
+for itemlist in data:#内容
+    for item in itemlist:
+        excel.write_to_excel(cur_col, cur_row, item)
+        cur_row += 1
+    cur_col += 1
+excel.save_excel()

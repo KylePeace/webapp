@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
+#python使用excel 方法
 import xlwt
 import xlrd
 from datetime import  datetime
@@ -84,7 +84,7 @@ def write_to_existed_file():
     rb = xlrd.open_workbook(r"NewCreateWorkbook.xls",formatting_info=True)
 
     wb = copy(rb)
-    ws = wb.get_sheet(0)
+    ws = wb.get_sheet(0) #sheet:写入读写，wb，rb：用于保存
     
     font=xlwt.Font()
     font.name="Times New Roman"
