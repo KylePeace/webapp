@@ -74,8 +74,8 @@ title = ["标题","链接","楼主","评论数","正文"]
 
 cur_row = 0
 for item in title: #表头
-    excel.write_to_excel(0,k,item)
-    key +=1
+    excel.write_to_excel(0, cur_row, item)
+    cur_row += 1
 
 cur_row = 0
 cur_col = 3
@@ -83,5 +83,6 @@ for itemlist in data:#内容
     for item in itemlist:
         excel.write_to_excel(cur_col, cur_row, item)
         cur_row += 1
+    cur_row = 0
     cur_col += 1
 excel.save_excel()

@@ -56,8 +56,8 @@ class CreateExcelData(object):
             self.excelSheet = self.excel.add_sheet(self.sheetname)
             
 
-    def write_to_excel(self, x, y, data):   
-        self.excelSheet.write(x, y, data)
+    def write_to_excel(self, y, x, data):   
+        self.excelSheet.write(y, x, data)
 
     def save_excel(self):
         self.excel.save(self.path)
