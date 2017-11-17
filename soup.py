@@ -23,8 +23,32 @@ news = soup.select(".nba-news-list")
 # print(news[0].href)
 # print(len(news[0]))
 for item in news[0].select("a"): #选择a标签
+   
     #print(item)
-    print(item.text)
+    #print(item.text)
     #获取网页链接
-    print(item["href"])
-    
+    #print(item["href"])
+    #print("-------------------------------------")
+    nPos = item["href"].find("https://bbs.hupu.com/")
+    #print(nPos)
+    if nPos != 0:
+        continue
+    print("-------------------------------------")
+    print("标题："+item.text)
+    print("链接："+item["href"])
+    real = requests.get(item["href"],headers)
+    soup2 = BeautifulSoup(real.content,"html.parser")
+    #print(soup2)
+    #print(soup2.select(".floor_box"))
+    #print(len(soup2.select(".floor_box")))
+    name = soup2.select(".floor_box")[0].select(".u")[0].text
+    print("楼主："+name)
+
+    #print("评论数："+soup2.select(".bbs-hd-h1")[0])
+    print("评论数："+soup2.select(".bbs-hd-h1")[0].select("span")[1].text.strip("回复"))
+
+    print(soup2.select(".case")[0])
+
+    print("\n"*2)
+ 
+ 
