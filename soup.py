@@ -71,7 +71,7 @@ for item in news[0].select("a"): #选择a标签
 
 now = datetime.datetime.now()
 time = now.strftime('%Y-%m-%d')
-excel = CreateExcelData("news", "excel/nba_news(" + time + ").xlsx")
+excel = CreateExcelData("news", "excel/nba_news(" + time + ").xls")
 title = ["标题","链接","楼主","评论数","正文"]
 excel.write_content(data, title)
 
