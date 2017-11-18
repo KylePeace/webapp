@@ -4,7 +4,7 @@ import os
 import xlwt
 import xlrd
 from xlutils.copy import copy
-
+import datetime
 
 
 class CreateExcelData(object):
@@ -55,9 +55,30 @@ class CreateExcelData(object):
             self.excel = xlwt.Workbook()
             self.excelSheet = self.excel.add_sheet(self.sheetname)
             
-
+    #写入excel
     def write_to_excel(self, y, x, data):   
         self.excelSheet.write(y, x, data)
+
+    # 表头
+    def write_titel(self,data):
+        cur_row = 0
+        for item in data:
+            self.write_to_excel(0, cur_row, item)
+            cur_row += 1
+    #参数：titleData 表头 data：内容
+    def write_content(self, data, titleData=None, cur_y=2, cur_x=0,isSave=True):
+        if titleData:
+            self.write_titel(titleData)
+
+        for itemlist in data:
+            for item in itemlist:
+                self.write_to_excel(cur_y, cur_x,item)
+                cur_x += 1
+            cur_x = 0
+            cur_y += 1 
+
+        if isSave:
+            self.save_excel()
 
     def save_excel(self):
         self.excel.save(self.path)
@@ -65,8 +86,14 @@ class CreateExcelData(object):
 
 
 if __name__ == '__main__':
-    excel = CreateExcelData("content","excel/new.xls")
-    excel.write_to_excel(0,0,"开学")
-    excel.write_to_excel(0,1, "开学la")
-    excel.save_excel()
+    now = datetime.datetime.now()
+    name = now.strftime('%Y-%m-%d')
+    excel = CreateExcelData("content","excel/"+name+".xlsx")
+    # excel.write_to_excel(0,0,"开学")
+    #excel.write_to_excel(0,1, "开学la")
+    # excel.save_excel()
+    data = [["kai","xew"],["fuck","you"]]
+    print(data)
+    titledata = ["888","999"]
+    excel.write_content(data,titledata)
 

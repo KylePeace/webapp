@@ -6,6 +6,7 @@
 import requests
 from bs4 import BeautifulSoup
 from CreateExcelData import *
+import datetime
 
 data = []
 
@@ -68,21 +69,9 @@ for item in news[0].select("a"): #选择a标签
     #print(itemData)
     data.append(itemData)
 
-print(data)
-excel = CreateExcelData("news", "excel/news.xls")
+now = datetime.datetime.now()
+time = now.strftime('%Y-%m-%d')
+excel = CreateExcelData("news", "excel/nba_news(" + time + ").xlsx")
 title = ["标题","链接","楼主","评论数","正文"]
+excel.write_content(data, title)
 
-cur_row = 0
-for item in title: #表头
-    excel.write_to_excel(0, cur_row, item)
-    cur_row += 1
-
-cur_row = 0
-cur_col = 3
-for itemlist in data:#内容
-    for item in itemlist:
-        excel.write_to_excel(cur_col, cur_row, item)
-        cur_row += 1
-    cur_row = 0
-    cur_col += 1
-excel.save_excel()
