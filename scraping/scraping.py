@@ -62,7 +62,7 @@
 #     movie_list = []
 #     dector_list = []
 #     for i in range(0,10):
-        
+
 #         link = "http://movie.douban.com/top250?start=" + \
 #             str(i * 25) + "&filter=";
 #         r = requests.get(link,headers = headers,timeout = 10)
@@ -76,8 +76,16 @@
 #             div_director = each.find_all('div', attrs={'class': 'bd'})
 #             print(div_director[0].p.text.strip())
 
-# getMovie() 
+# getMovie()
 
 #四
 #4.3.1
-# selenium  使用              
+# selenium  使用 需要下载geckodriver
+
+from selenium import webdriver
+from selenium.webdriver.chrome.chrome_binary import ChromeBinary
+
+
+driver = webdriver.Chrome()
+
+driver.get("http://www.santostang.com/2017/03/02/hello-world/")
