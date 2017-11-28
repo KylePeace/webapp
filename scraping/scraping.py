@@ -83,9 +83,20 @@
 # selenium  使用 需要下载geckodriver
 
 from selenium import webdriver
-from selenium.webdriver.chrome.chrome_binary import ChromeBinary
+from selenium.webdriver.common.keys import Keys
+import os
 
+#chromepath = os.path.abspath("C:\ProgramData\Anaconda3\Scripts\chromedriver.exe")
 
-driver = webdriver.Chrome()
+#设置不显示图片
+chrome_options  = webdriver.ChromeOptions()
+prefs = {"profile.managed_default_content_settings.images":2}
+chrome_options.add_experimental_option("prefs",prefs)
 
-driver.get("http://www.santostang.com/2017/03/02/hello-world/")
+#driver = webdriver.Chrome(executable_path = chromepath,chrome_options = chrome_options
+driver = webdriver.Chrome(chrome_options = chrome_options)
+driver.get('http://www.baidu.com')
+print(driver.title)
+
+print(driver.page_source)
+driver.quit()
