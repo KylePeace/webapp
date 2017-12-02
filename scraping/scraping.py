@@ -81,11 +81,96 @@
 #四
 #4.3.1
 # selenium  使用 需要下载geckodriver
+# from selenium import webdriver
 
+# chromepath = r"C:\Users\hukai\AppData\Local\Google\Chrome\Application\chrome.exe"
+
+
+# driver = webdriver.Chrome()
+
+# driver.get("http://www.santostang.com/2017/03/02/hello-world/")
+
+# print(driver.title)
+
+# driver.switch_to.frame(driver.find_element_by_css_selector("iframe[title='livere']"))
+# comment = driver.find_element_by_css_selector('div.reply-content')
+# content = comment.find_element_by_tag_name('p')
+# print(content.text)
+#driver.quit()
+
+
+#4.3.3
+# from selenium import webdriver
+# driver = webdriver.Chrome()
+# driver.get("http://www.santostang.com/2017/03/02/hello-world/")
+# driver.switch_to.frame(
+#     driver.find_element_by_css_selector("iframe[title='livere']"))
+# comments = driver.find_elements_by_css_selector('div.reply-content')
+
+# for each in comments:
+#     content = each.find_element_by_tag_name('p')
+#     print (content.text)
+# driver.quit()
+
+#4.3.4
+# from selenium import webdriver
+# # caps = webdriver.DesiredCapabilities().CHROME
+# # caps["marionette"] = False
+
+# co = webdriver.ChromeOptions()
+
+# driver = webdriver.Chrome()
+# driver.get("http://www.santostang.com/2017/03/02/hello-world/")
+# driver.quit()
+
+# print("game over")
+
+#4.3.5 练习
+#爬取深圳爱比邻数据，房源名称，价格，评价数量，房屋类型，床数量，房客数量
 from selenium import webdriver
-from selenium.webdriver.chrome.chrome_binary import ChromeBinary
+import time
+
+nowtime = time.time()
+#不显示图片
+chrome_options = webdriver.ChromeOptions()
+prefs = {"profile.managed_default_content_settings.images": 2}
+chrome_options.add_experimental_option("prefs", prefs)
+
+#driver = webdriver.Chrome(executable_path = chromepath,chrome_options = chrome_options
+driver = webdriver.Chrome(chrome_options=chrome_options)
+
+URL = "https://zh.airbnb.com/s/%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82/homes?place_id=ChIJkVLh0Aj0AzQRyYCStw1V7v0&allow_override%5B%5D=&s_tag=p1wmjt4M&cdn_cn="
+
+ret_list = []
+for x in range(0,20):
+    driver.get(URL+"1")
+    ret_list = driver.find_elements_by_css_selector("div._1mpo9ida")
+    for eachhouse in ret_list:
+        try:
+            comment = eachhouse.find_element_by_css_selector("span._gb7fydm")
+            comment = comment.text
+        except:
+            comment = "new"
+
+        price = eachhouse.find_element_by_css_selector("span._hylizj6")
+        price = price.text
+        name = eachhouse.find_element_by_css_selector("span._a4k7y39")
+        name = name.text
+        details = eachhouse.find_element_by_css_selector("span._1127fdt6")
+        details = details.text
+
+        print(name)
+        print("评论数：" + comment)
+        print(price)
+        print(details)
+    
+        print("   ")
+        print("   ")
 
 
-driver = webdriver.Chrome()
+driver.quit()
 
-driver.get("http://www.santostang.com/2017/03/02/hello-world/")
+print("爬取爱比邻数据结束！")
+
+usetime = time.time() - nowtime
+print("共用时:%秒" %usetime)
