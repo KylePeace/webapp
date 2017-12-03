@@ -304,4 +304,27 @@
 #             , tags)
 #         print(special)
 
+#六.数据存储
+#txt
+# title = "this is a test sentence"
+# with open('C:\\Users\\hukai\\Desktop\\title.txt',"a+") as f:
+#     f.write(title)
+#     f.close()
 
+# output = "\t".join(["name","age","sex"])
+# with open(r'C:\Users\hukai\Desktop\title.txt',"a+") as f:
+#     f.write("s"+r"\n")
+#     f.write(output)
+#     f.close()
+
+# with open(r'C:\Users\hukai\Desktop\title.txt', "r") as f:
+#     result =f.read()
+#     print(result)
+
+#csv
+import csv
+with open(r'C:\Users\hukai\Desktop\test.csv',"r",encoding="UTF-8") as csvfile:
+    csv_reader = csv.reader(csvfile)
+    for row in csv_reader:
+        print(row)
+        print(row[0])
