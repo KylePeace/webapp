@@ -125,53 +125,71 @@
 
 # print("game over")
 
-#4.3.5 练习
-#爬取深圳爱比邻数据，房源名称，价格，评价数量，房屋类型，床数量，房客数量
-from selenium import webdriver
-import time
+# #4.3.5 练习
+# #爬取深圳爱比邻数据，房源名称，价格，评价数量，房屋类型，床数量，房客数量,爬取20页数据，动态网页爬取
+# #动态网页与静态网页的区别 ：动态网页加载有时候使用的是json，不是在html中
+# from selenium import webdriver
+# import time
 
-nowtime = time.time()
-#不显示图片
-chrome_options = webdriver.ChromeOptions()
-prefs = {"profile.managed_default_content_settings.images": 2}
-chrome_options.add_experimental_option("prefs", prefs)
+# nowtime = time.time()
+# #不显示图片
+# chrome_options = webdriver.ChromeOptions()
+# prefs = {"profile.managed_default_content_settings.images": 2}
+# chrome_options.add_experimental_option("prefs", prefs)
 
-#driver = webdriver.Chrome(executable_path = chromepath,chrome_options = chrome_options
-driver = webdriver.Chrome(chrome_options=chrome_options)
+# #driver = webdriver.Chrome(executable_path = chromepath,chrome_options = chrome_options
+# driver = webdriver.Chrome(chrome_options=chrome_options)
 
-URL = "https://zh.airbnb.com/s/%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82/homes?place_id=ChIJkVLh0Aj0AzQRyYCStw1V7v0&allow_override%5B%5D=&s_tag=p1wmjt4M&cdn_cn="
+# URL = "https://zh.airbnb.com/s/%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82/homes?place_id=ChIJkVLh0Aj0AzQRyYCStw1V7v0&allow_override%5B%5D=&s_tag=p1wmjt4M&cdn_cn="
 
-ret_list = []
-for x in range(0,20):
-    driver.get(URL+"1")
-    ret_list = driver.find_elements_by_css_selector("div._1mpo9ida")
-    for eachhouse in ret_list:
-        try:
-            comment = eachhouse.find_element_by_css_selector("span._gb7fydm")
-            comment = comment.text
-        except:
-            comment = "new"
+# ret_list = []
+# for x in range(0,20):
+#     driver.get(URL+"1")
+#     ret_list = driver.find_elements_by_css_selector("div._1mpo9ida")
+#     for eachhouse in ret_list:
+#         try:
+#             comment = eachhouse.find_element_by_css_selector("span._gb7fydm")
+#             comment = comment.text
+#         except:
+#             comment = "new"
 
-        price = eachhouse.find_element_by_css_selector("span._hylizj6")
-        price = price.text
-        name = eachhouse.find_element_by_css_selector("span._a4k7y39")
-        name = name.text
-        details = eachhouse.find_element_by_css_selector("span._1127fdt6")
-        details = details.text
+#         price = eachhouse.find_element_by_css_selector("span._hylizj6")
+#         price = price.text
+#         name = eachhouse.find_element_by_css_selector("span._a4k7y39")
+#         name = name.text
+#         details = eachhouse.find_element_by_css_selector("span._1127fdt6")
+#         details = details.text
 
-        print(name)
-        print("评论数：" + comment)
-        print(price)
-        print(details)
-    
-        print("   ")
-        print("   ")
+#         print(name)
+#         print("评论数：" + comment)
+#         print(price)
+#         print(details)   
+#         print("   ")
+#         print("   ")
+# driver.quit()
+# print("爬取爱比邻数据结束！")
+# usetime = time.time() - nowtime
+# print("共用时:%秒" %usetime)
 
-
-
-driver.quit()
-
-print("爬取爱比邻数据结束！")
-
-usetime = time.time() - nowtime
-print("共用时:%秒" %usetime)
+#五.解析网页
+#5.1 使用正则表达式解析网页
+'''
+. : 匹配任意字符，除了换行符
+* ：匹配前一个字符0次或者多次
++ ：匹配前一个字符1次或者多次
+？ ：匹配前一个字符0次或者1次
+^ ：匹配字符串开头
+$ ：匹配字符串末尾
+():匹配括号内的表达式，也表示一个组
+\s :匹配空白字符
+\S :匹配任何非空白字符
+\d :匹配数字，等价于｛0-9｝
+\D :匹配任何非数字，等价于｛^0-9｝
+\w :匹配字母数字，等价于[A-Za-z0-9]
+\W :匹配非字母数字，等价于[^A-Za-z0-9]
+[] :用来表示一组字符
+'''
+#正则练习
+import re
+m = re.match('www',"www.santostang.com")
+print(m)
