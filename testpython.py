@@ -1,4 +1,5 @@
 
-import time
+a = 1
+b = "s%d"
 
-print("fuck %f"%time.time())
+print(b%a)
