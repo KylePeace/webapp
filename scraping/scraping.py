@@ -173,23 +173,62 @@
 
 #五.解析网页
 #5.1 使用正则表达式解析网页
-'''
-. : 匹配任意字符，除了换行符
-* ：匹配前一个字符0次或者多次
-+ ：匹配前一个字符1次或者多次
-？ ：匹配前一个字符0次或者1次
-^ ：匹配字符串开头
-$ ：匹配字符串末尾
-():匹配括号内的表达式，也表示一个组
-\s :匹配空白字符
-\S :匹配任何非空白字符
-\d :匹配数字，等价于｛0-9｝
-\D :匹配任何非数字，等价于｛^0-9｝
-\w :匹配字母数字，等价于[A-Za-z0-9]
-\W :匹配非字母数字，等价于[^A-Za-z0-9]
-[] :用来表示一组字符
-'''
+# '''
+# . : 匹配任意字符，除了换行符
+# * ：匹配前一个字符0次或者多次
+# + ：匹配前一个字符1次或者多次
+# ？ ：匹配前一个字符0次或者1次
+# ^ ：匹配字符串开头
+# $ ：匹配字符串末尾
+# ():匹配括号内的表达式，也表示一个组
+# \s :匹配空白字符
+# \S :匹配任何非空白字符
+# \d :匹配数字，等价于｛0-9｝
+# \D :匹配任何非数字，等价于｛^0-9｝
+# \w :匹配字母数字，等价于[A-Za-z0-9]
+# \W :匹配非字母数字，等价于[^A-Za-z0-9]
+# [] :用来表示一组字符
+# '''
 #正则练习
+#re.match(pattern, string, flags=0) flags:用来控制正则表达式的匹配方式，如：是否区分大小写，多行匹配
+#re.search()
+
+# 练习1
+# import re
+# m = re.match('www',"www.santostang.com")
+# print("匹配结果：", m)
+# print("匹配的起始和终点：", m.span())
+# print("匹配的起始位置：", m.start())
+# print("匹配的终点位置：", m.end())
+
+# #练习2
+# import re
+# line = "Fat cats are smarter than dogs, is it right?"
+# m = re.match(r'(.*) are (.*?) dogs', line)
+# #m = re.match(r'(.?) are', line)
+
+# print("匹配的整句话：", m.group())
+# print("匹配的第一句话：", m.group(1))
+# print("匹配的第二句话：", m.group(2))
+# print("匹配的结果列表：", m.groups())
+
+# #练习3
+# # match:只能从字符串的起始位置进行匹配
+# # search：扫描整个字符串并返回第一个成功匹配
+# import re
+# m_match = re.match("com",'www.santostang.com')
+# m_search = re.search("com", 'www.santostang.com')
+# print(m_match)
+# print(m_search)
+
+#练习4
+#match,search 匹配一个返回
+#findall 匹配所有可能的对象返回
 import re
-m = re.match('www',"www.santostang.com")
-print(m)
+m_match = re.match('[0-9]+','12345 is the first number,23456 is the sencond')
+m_search = re.search('[0-9]+','12345 is the first number,23456 is the sencond')
+m_findall = re.findall('[0-9]+','12345 is the first number,23456 is the sencond')
+
+print(m_match.group())    # 123456
+print(m_search.group())   # 123456
+print(m_findall)  # ['12345', '23456']
