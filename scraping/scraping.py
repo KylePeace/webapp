@@ -329,24 +329,37 @@
 #         print(row)
 #         print(row[0])
 
+# E:\software\soft\MongoDB\3.4\bin
+ 
+# 1.创建数据库文件
+# mongod.exe --dbpath D:\data\db 
+
+#  设置服务名称
+#  1.
+#  mongod.exe --logpath "D:\data\log\mongodb.log"  --logappend --dbpath "D:\data\db" --serviceName "MongoDB"--install
+
+# 启动服务器
+# 2.net start MongoDb
+
 
 #mongo数据库操作
-import requests
-import datetime
-from bs4 import BeautifulSoup
-from pymongo import MongoClient
-client = MongoClient("localhost",27017)
-db = client.blog_database
-collection = db.blog
+# import requests
+# import datetime
+# from bs4 import BeautifulSoup
+# from pymongo import MongoClient
+# client = MongoClient("localhost",27017)
+# db = client.blog_database
+# collection = db.blog
 
-link = "http://www.santostang.com/"
-headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36"}
-r = requests.get(link,headers = headers)
+# link = "http://www.santostang.com/"
+# headers = {'User-Agent': "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.89 Safari/537.36"}
+# r = requests.get(link,headers = headers)
 
-soup = BeautifulSoup(r.text,"lxml")
-title_list = soup.find_all("h1",class_ = "post-title")
-for eachone in title_list:
-    url = eachone.a["href"]
-    title = eachone.a.text.strip()
-    post = {"url":url,"title":title,"date":datetime.datetime.utcnow()}
-    collection.insert_one(post)
+# soup = BeautifulSoup(r.text,"lxml")
+# title_list = soup.find_all("h1",class_ = "post-title")
+# for eachone in title_list:
+#     url = eachone.a["href"]
+#     title = eachone.a.text.strip()
+#     post = {"url":url,"title":title,"date":datetime.datetime.utcnow()}
+#     collection.insert_one(post)
+
