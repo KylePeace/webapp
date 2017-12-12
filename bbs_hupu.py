@@ -46,7 +46,8 @@ def get_page_data(data_list,post_list):
 
         data_list.append(data)
     return  data_list
-    
+
+#连接mogodb数据库   
 def connect_mogodb():
     conn = MongoClient("localhost",27017)
     db = conn.mydb
