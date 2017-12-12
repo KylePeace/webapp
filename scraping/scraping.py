@@ -85,6 +85,7 @@
 
 # chromepath = r"C:\Users\hukai\AppData\Local\Google\Chrome\Application\chrome.exe"
 
+#chromepath = os.path.abspath("C:\ProgramData\Anaconda3\Scripts\chromedriver.exe")
 
 # driver = webdriver.Chrome()
 
